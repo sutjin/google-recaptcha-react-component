@@ -1,11 +1,11 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var parentDir = path.join(__dirname, '../');
+var parentDir = path.join(__dirname, './');
 
 module.exports = {
     entry: [
-        path.join(parentDir, 'index.js')
+        path.join(parentDir, 'index.jsx')
     ],
     module: {
         loaders: [{
