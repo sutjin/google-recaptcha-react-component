@@ -1,4 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-ReactDOM.render(<div />, document.getElementById('app'))
+// TODO: make it into a class to export
+ReactDOM.render(<div>Hello World<div />, document.getElementById('app'))
