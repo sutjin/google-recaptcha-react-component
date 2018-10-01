@@ -1,8 +1,8 @@
-const React = require('react'),
-  PropTypes = require('prop-types'),
-  styles = require('./index.scss'),
-  recaptchaLoader = require('./loader.js'),
-  CALLBACK_NAME = 'captchaFunction';
+import React from 'react';
+import PropTypes from 'prop-types';
+import loader from './loader.js';
+
+const CALLBACK_NAME = 'recaptchaFunction';
 
 let externalFunction = {};
 
@@ -33,11 +33,10 @@ class ReCaptcha extends React.Component {
     window.grecaptcha.execute(this.recaptchaId);
   }
 
-
   renderReCaptcha (element) {
     const { token } = this.props;
 
-    recaptchaLoader((grecaptcha) => {
+    loader((grecaptcha) => {
       this.recaptchaId = grecaptcha.render(element, {
         sitekey: token,
         callback: CALLBACK_NAME,
@@ -55,15 +54,12 @@ class ReCaptcha extends React.Component {
       isValid
     };
 
-
     return (
-      <div className={styles['recaptcha-wrapper']}>
-        <div className={styles.captchaContainer} >
-          <div
-            className="g-recaptcha"
-            ref={(recaptchaContainer) => { this.recaptchaContainer = recaptchaContainer; }}
-          />
-        </div>
+      <div>
+        <div
+          className="g-recaptcha"
+          ref={(recaptchaContainer) => { this.recaptchaContainer = recaptchaContainer; }}
+        />
       </div>
     );
   }
