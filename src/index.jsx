@@ -11,10 +11,12 @@ class ReCaptcha extends React.Component {
   componentDidMount () {
     this.renderReCaptcha = this.renderReCaptcha.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.execute = this.execute.bind(this);
 
     window[CALLBACK_NAME] = this.onFormSubmit;
 
     this.renderReCaptcha(this.recaptchaContainer);
+    this.props.onRef(this);
   }
 
 
@@ -39,19 +41,17 @@ class ReCaptcha extends React.Component {
     loader((grecaptcha) => {
       this.recaptchaId = grecaptcha.render(element, {
         sitekey: token,
-        callback: CALLBACK_NAME,
-        size: 'invisible'
+        callback: CALLBACK_NAME
       });
     });
   }
 
   render () {
-    const { onSuccess, callback, isValid } = this.props;
+    const { onSuccess, callback } = this.props;
 
     externalFunction = {
       onSuccess,
-      callback,
-      isValid
+      callback
     };
 
     return (
@@ -68,8 +68,7 @@ class ReCaptcha extends React.Component {
 ReCaptcha.propTypes = {
   token: PropTypes.string.isRequired,
   callback: PropTypes.func.isRequired,
-  onSuccess: PropTypes.func.isRequired,
-  isValid: PropTypes.bool.isRequired
+  onSuccess: PropTypes.func.isRequired
 };
 
 ReCaptcha.defaultProps = {

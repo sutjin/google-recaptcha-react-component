@@ -12,9 +12,6 @@ module.exports = {
             test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
-            },{
-                test: /\.less$/,
-                loaders: ["style-loader", "css-loder", "less-loader"]
             }
         ]
     },
