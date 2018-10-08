@@ -1,8 +1,8 @@
 {
   "name": "google-recaptcha-react-component",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Enable Google Recaptcha for your React project",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "test": "./node_modules/.bin/jest",
     "dev": "./node_modules/.bin/webpack-dev-server --inline --hot --env.env dev",
@@ -12,7 +12,10 @@
     "type": "git",
     "url": "git+https://github.com/sutjin/google-recaptcha-react-component.git"
   },
-  "author": "Nabil Sutjipto",
+  "author": {
+   "name": "Nabil Sutjipto",
+   "email": "sutjin@hotmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sutjin/google-recaptcha-react-component/issues"

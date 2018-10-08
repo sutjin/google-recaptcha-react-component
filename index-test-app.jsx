@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReCaptcha from './components/index.jsx';
+import ReCaptcha from './src/index.jsx';
 
 class Parent extends React.Component {
   onClick = () => {
