@@ -21,10 +21,8 @@ class ReCaptcha extends React.Component {
 
 
   onFormSubmit (token) {
-    externalFunction.onSuccess(token, () => {
-      window.grecaptcha.reset(this.recaptchaId);
-      externalFunction.callback();
-    });
+    externalFunction.onSuccess(token);
+    window.grecaptcha.reset(this.recaptchaId);
   }
 
   componentWillUmount () {
@@ -47,11 +45,10 @@ class ReCaptcha extends React.Component {
   }
 
   render () {
-    const { onSuccess, callback } = this.props;
+    const { onSuccess } = this.props;
 
     externalFunction = {
-      onSuccess,
-      callback
+      onSuccess
     };
 
     return (
@@ -67,11 +64,12 @@ class ReCaptcha extends React.Component {
 
 ReCaptcha.propTypes = {
   token: PropTypes.string.isRequired,
-  callback: PropTypes.func.isRequired,
-  onSuccess: PropTypes.func.isRequired
+  onSuccess: PropTypes.func.isRequired,
+  onRef: PropTypes.func
 };
 
 ReCaptcha.defaultProps = {
+  onRef: () => {} 
 };
 
 module.exports = ReCaptcha;

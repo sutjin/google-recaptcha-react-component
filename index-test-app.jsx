@@ -11,10 +11,8 @@ class Parent extends React.Component {
     return (
       <div>
       <ReCaptcha
-        token="6Lc7l3MUAAAAAC_SpbFT_U35WCVNQts8UjZdeMQN"
-        callback={()=>{ console.log('hello') }}
+        token="TEST_ACCOUNT"
         onSuccess={(token, callback)=>{ callback(); }}
-        isValid={true}
         onRef={ref => (this.child = ref)} />
       <button onClick={this.onClick}>Child.method()</button>
       </div>
