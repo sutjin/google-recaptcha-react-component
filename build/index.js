@@ -447,13 +447,16 @@ var ReCaptcha = function (_React$Component) {
     value: function renderReCaptcha(element) {
       var _this2 = this;
 
-      var token = this.props.token;
+      var _props = this.props,
+          token = _props.token,
+          size = _props.size;
 
 
       (0, _loader2.default)(function (grecaptcha) {
         _this2.recaptchaId = grecaptcha.render(element, {
           sitekey: token,
-          callback: CALLBACK_NAME
+          callback: CALLBACK_NAME,
+          size: size
         });
       });
     }

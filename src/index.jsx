@@ -34,12 +34,13 @@ class ReCaptcha extends React.Component {
   }
 
   renderReCaptcha (element) {
-    const { token } = this.props;
+    const { token, size } = this.props;
 
     loader((grecaptcha) => {
       this.recaptchaId = grecaptcha.render(element, {
         sitekey: token,
-        callback: CALLBACK_NAME
+        callback: CALLBACK_NAME,
+        size: size
       });
     });
   }
@@ -69,7 +70,7 @@ ReCaptcha.propTypes = {
 };
 
 ReCaptcha.defaultProps = {
-  onRef: () => {} 
+  onRef: () => {}
 };
 
 module.exports = ReCaptcha;

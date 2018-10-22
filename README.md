@@ -7,17 +7,17 @@ Easy to use React component to enable Google ReCaptcha for your form
 ## Using the components
 1. install the component to your project
 ```
-$ npm install --save google-recaptcha-react-module
+$ npm install --save google-recaptcha-react-component
 ```
 2. Import the component
 ```
 // es6
-import  ReCaptcha  from  'google-recaptcha-react-module';
+import  ReCaptcha  from  'google-recaptcha-react-component';
 ```
 
 ```
 // es5
-var ReCaptcha =  require('google-recaptcha-react-module');
+var ReCaptcha =  require('google-recaptcha-react-component');
 ```
 3. Use it like any other component!
 ```
@@ -35,6 +35,7 @@ Component Props
 | Prop Name  |Type | Note|
 | ------------- | ------------- | ------------- |
 | token  | **Required**. string  |  token given by Google ReCaptcha|
+|size|*Optional*. String| set value to "invisible" for invisible ReCaptcha|
 | onSuccess  | **Required**. function(token)  | Callback function triggered when ReCaptcha is resolved. *token* is a vlue returned by ReCapthca that you will need to validate.|
 |onRef|*Optional*. object| Required if using the invisible ReCaptcha, otherwise it is not needed
 
@@ -74,6 +75,7 @@ class Parent extends React.Component {
 			<div>
 				<ReCaptcha
 					token="SAMPLE_TOKEN_FROM_RECAPTCHA"
+					size="invisible"
 					onSuccess={this.onSuccess}
 					onRef={ref => (this.child = ref)} />
 				<button onClick={this.onClick}>ReCaptcha.method()</button>

@@ -1,6 +1,6 @@
 {
   "name": "google-recaptcha-react-component",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Enable Google Recaptcha for your React project",
   "main": "build/index.js",
   "scripts": {

@@ -4,15 +4,21 @@ import ReCaptcha from './src/index.jsx';
 
 class Parent extends React.Component {
   onClick = () => {
-    this.child.execute();
+      this.child.execute(); // Triggers Invisible ReCaptcha
+  }
+
+  onSuccess = (token) => {
+    console.log(token);
+      // TODO: Validate the token your way and continue process
   }
 
   render() {
     return (
       <div>
       <ReCaptcha
-        token="TEST_ACCOUNT"
-        onSuccess={(token, callback)=>{ callback(); }}
+        token="TEST_TOKEN"
+        size="invisible"
+        onSuccess={this.onSuccess}
         onRef={ref => (this.child = ref)} />
       <button onClick={this.onClick}>Child.method()</button>
       </div>
