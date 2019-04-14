@@ -1,26 +1,33 @@
-var webpack = require('webpack');
-var path = require('path');
-
-var parentDir = path.join(__dirname, './');
-
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 module.exports = {
-    entry: [
-        path.join(parentDir, 'index-test-app.jsx')
-    ],
-    module: {
-        loaders: [{
-            test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader'
-            }
+  mode: 'development',
+  entry: './sample/index.jsx',
+  output: {
+    filename: 'bundle.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader"
+          }
         ]
-    },
-    output: {
-        path: parentDir + '/dist',
-        filename: 'bundle.js'
-    },
-    devServer: {
-        contentBase: parentDir,
-        historyApiFallback: true
-    }
-}
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./sample/index.html",
+      filename: "./index.html"
+    })
+  ]
+};
