@@ -1,13 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import ReCaptcha from './src/index.jsx';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+
+import ReCaptcha from '../src/index.jsx';
 
 class Parent extends React.Component {
-  onClick = () => {
-      this.child.execute(); // Triggers Invisible ReCaptcha
+  constructor (){
+    super();
+
+    this.onClick = this.onClick.bind(this);
   }
 
-  onSuccess = (token) => {
+  onClick() {
+    this.child.execute(); // Triggers Invisible ReCaptcha
+  }
+
+  onSuccess(token) {
     console.log(token);
       // TODO: Validate the token your way and continue process
   }

@@ -1,20 +1,24 @@
 {
   "name": "google-recaptcha-react-component",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Enable Google Recaptcha for your React project",
   "main": "build/index.js",
+  "publishConfig": {
+    "access": "restricted"
+  },
   "scripts": {
-    "test": "./node_modules/.bin/jest",
-    "dev": "./node_modules/.bin/webpack-dev-server --inline --hot --env.env dev",
-    "build": "webpack --config webpack.config.build.js"
+    "test": "jest",
+    "dev": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production --config webpack.config.production.js",
+    "prepublish": "rm -rf ./dist && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sutjin/google-recaptcha-react-component.git"
   },
   "author": {
-   "name": "Nabil Sutjipto",
-   "email": "sutjin@hotmail.com"
+    "name": "Nabil Sutjipto",
+    "email": "sutjin@hotmail.com"
   },
   "license": "MIT",
   "bugs": {
@@ -22,49 +26,27 @@
   },
   "homepage": "https://github.com/sutjin/google-recaptcha-react-component#readme",
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.0.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-plugin-transform-runtime": "^6.0.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "bootstrap-loader": "git+https://github.com/shakacode/bootstrap-loader.git",
-    "css-loader": "^0.28.7",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.6.0",
-    "eslint": "^4.9.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.4.0",
-    "jest": "^23.6.0",
-    "react-test-renderer": "^16.5.2",
-    "uglifyjs-webpack-plugin": "^1.2.5",
-    "webpack": "^2.6.0",
-    "webpack-dev-server": "^2.9.4"
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.7.1",
+    "babel-loader": "^8.0.5",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.7.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-test-renderer": "^16.8.6",
+    "resolve-url-loader": "^3.0.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
   },
-  "dependencies": {
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0",
-    "prop-types": "^15.5.10"
-  },
-  "babel": {
-    "presets": [
-      "env",
-      "es2015",
-      "react",
-      "stage-0"
-    ],
-    "plugins": [
-      "transform-object-rest-spread"
-    ]
-  },
-  "jest": {
-    "setupTestFrameworkScriptFile": "./test-setup.js"
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }

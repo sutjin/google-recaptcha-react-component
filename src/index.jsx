@@ -22,7 +22,9 @@ class ReCaptcha extends React.Component {
 
   onFormSubmit (token) {
     externalFunction.onSuccess(token);
-    window.grecaptcha.reset(this.recaptchaId);
+    if ( this.props.size === "invisible") {
+      window.grecaptcha.reset(this.recaptchaId);
+    }
   }
 
   componentWillUmount () {
@@ -73,4 +75,4 @@ ReCaptcha.defaultProps = {
   onRef: () => {}
 };
 
-module.exports = ReCaptcha;
+export default ReCaptcha;
