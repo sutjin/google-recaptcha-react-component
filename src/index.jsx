@@ -22,7 +22,7 @@ class ReCaptcha extends React.Component {
 
   onFormSubmit (token) {
     externalFunction.onSuccess(token);
-    if ( this.props === "invisible") {
+    if ( this.props.size === "invisible") {
       window.grecaptcha.reset(this.recaptchaId);
     }
   }

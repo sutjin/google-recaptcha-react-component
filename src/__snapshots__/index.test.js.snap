@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ReCaptcha container correctly 1`] = `
+<div>
+  <div
+    className="g-recaptcha"
+  />
+</div>
+`;
