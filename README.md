@@ -1,7 +1,7 @@
 
 # google-recaptcha-react-module
 
-Easy to use React component to enable Google ReCaptcha for your form
+Easy to use React component to enable Google ReCaptcha for your form. The component allows the use of regular and even invisible ReCaptcha
 
 
 ## Using the components
@@ -88,11 +88,6 @@ class Parent extends React.Component {
 ### Get Your ReCaptcha account
 
 Create your ReCaptcha account and follow the instruction [here](https://www.google.com/recaptcha/)
-
-## Whats next?
-
- - Complete Unit test
- - CSS Override
 
 ## Contributing
 Please fill any bugs or issue [here](https://github.com/sutjin/google-recaptcha-react-component/issues)
