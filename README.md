@@ -1,6 +1,7 @@
 
 # google-recaptcha-react-module
 
+![Build Status](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiYXVKN3VLcE8rYUVHcWtNYWpkaEZPMEptUmo0bkdwWXVCeGtlUkFrWjRWdlZGNzZiVVR6a3g0d050b0JUQVRZcGhGQkVOOWt1SWlFUVFwTTB5bjRvSUxzPSIsIml2UGFyYW1ldGVyU3BlYyI6ImM1OHZXTmJtcEMwL3lmRjAiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
 Easy to use React component to enable Google ReCaptcha for your form. The component allows the use of regular and even invisible ReCaptcha
 
 

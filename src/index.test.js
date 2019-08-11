@@ -2,21 +2,21 @@
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-configure({ adapter: new Adapter() });
-
 // test
 import React from 'react';
-import ReCaptcha from './index.jsx';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
+import ReCaptcha from './index.jsx';
+
+configure({ adapter: new Adapter() });
 
 global.grecaptcha = {
-    reset: jest.fn(),
-    execute: jest.fn()
-}
+  reset: jest.fn(),
+  execute: jest.fn(),
+};
 
-const mockCallback = jest.fn(),
-  mockOnSuccess = jest.fn();
+const mockCallback = jest.fn();
+const mockOnSuccess = jest.fn();
 
 it('renders ReCaptcha container correctly', () => {
   let component;
@@ -24,8 +24,9 @@ it('renders ReCaptcha container correctly', () => {
     .create(
       <ReCaptcha
         token="testToken"
-        onSuccess={(token, callback)=>{ }}
-        onRef={ref => (component = ref)} />
+        onSuccess={(token, callback) => { }}
+        onRef={(ref) => (component = ref)}
+      />,
     )
     .toJSON();
   expect(tree).toMatchSnapshot();
@@ -33,14 +34,15 @@ it('renders ReCaptcha container correctly', () => {
 
 it('should trigger onSuccess and callback when onFormSubmit is triggered', () => {
   let component;
-  const mockOnSuccess = jest.fn(),
-    tree = shallow(
-        <ReCaptcha
-          token="testToken"
-          size="invisible"
-          onSuccess={mockOnSuccess}
-          onRef={ref => (component = ref)} />
-      );
+  const mockOnSuccess = jest.fn();
+  const tree = shallow(
+    <ReCaptcha
+      token="testToken"
+      size="invisible"
+      onSuccess={mockOnSuccess}
+      onRef={(ref) => (component = ref)}
+    />,
+  );
 
   component.onFormSubmit();
   expect(mockOnSuccess).toHaveBeenCalled();
@@ -49,11 +51,12 @@ it('should trigger onSuccess and callback when onFormSubmit is triggered', () =>
 it('should reset recaptcha when component is unmounted', () => {
   let component;
   const tree = shallow(
-      <ReCaptcha
-        token="testToken"
-        onSuccess={(token, callback)=>{ }}
-        onRef={ref => (component = ref)} />
-    );
+    <ReCaptcha
+      token="testToken"
+      onSuccess={(token, callback) => { }}
+      onRef={(ref) => (component = ref)}
+    />,
+  );
 
   tree.unmount();
   expect(global.grecaptcha.reset).toHaveBeenCalled();
@@ -61,13 +64,14 @@ it('should reset recaptcha when component is unmounted', () => {
 
 it('should trigger recaptcha if execute is triggered', () => {
   let component;
-  const mockOnSuccess = jest.fn(),
-    tree = shallow(
-        <ReCaptcha
-          token="testToken"
-          onSuccess={mockOnSuccess}
-          onRef={ref => (component = ref)} />
-      );
+  const mockOnSuccess = jest.fn();
+  const tree = shallow(
+    <ReCaptcha
+      token="testToken"
+      onSuccess={mockOnSuccess}
+      onRef={(ref) => (component = ref)}
+    />,
+  );
 
   component.execute();
   expect(global.grecaptcha.reset).toHaveBeenCalled();
