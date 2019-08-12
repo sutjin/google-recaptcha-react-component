@@ -1,12 +1,13 @@
+/* eslint-disable react/jsx-filename-extension */
+
 // setup file
-import { configure } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 // test
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { shallow } from 'enzyme';
-import ReCaptcha from './index.jsx';
+import ReCaptcha from './index';
 
 configure({ adapter: new Adapter() });
 
@@ -15,17 +16,13 @@ global.grecaptcha = {
   execute: jest.fn(),
 };
 
-const mockCallback = jest.fn();
-const mockOnSuccess = jest.fn();
-
 it('renders ReCaptcha container correctly', () => {
-  let component;
   const tree = renderer
     .create(
       <ReCaptcha
         token="testToken"
-        onSuccess={(token, callback) => { }}
-        onRef={(ref) => (component = ref)}
+        onSuccess={() => { }}
+        onRef={() => { }}
       />,
     )
     .toJSON();
@@ -35,12 +32,13 @@ it('renders ReCaptcha container correctly', () => {
 it('should trigger onSuccess and callback when onFormSubmit is triggered', () => {
   let component;
   const mockOnSuccess = jest.fn();
-  const tree = shallow(
+
+  shallow(
     <ReCaptcha
       token="testToken"
       size="invisible"
       onSuccess={mockOnSuccess}
-      onRef={(ref) => (component = ref)}
+      onRef={(ref) => { component = ref; }}
     />,
   );
 
@@ -49,12 +47,11 @@ it('should trigger onSuccess and callback when onFormSubmit is triggered', () =>
 });
 
 it('should reset recaptcha when component is unmounted', () => {
-  let component;
   const tree = shallow(
     <ReCaptcha
       token="testToken"
-      onSuccess={(token, callback) => { }}
-      onRef={(ref) => (component = ref)}
+      onSuccess={() => { }}
+      onRef={() => { }}
     />,
   );
 
@@ -65,11 +62,12 @@ it('should reset recaptcha when component is unmounted', () => {
 it('should trigger recaptcha if execute is triggered', () => {
   let component;
   const mockOnSuccess = jest.fn();
-  const tree = shallow(
+
+  shallow(
     <ReCaptcha
       token="testToken"
       onSuccess={mockOnSuccess}
-      onRef={(ref) => (component = ref)}
+      onRef={(ref) => { component = ref; }}
     />,
   );
 

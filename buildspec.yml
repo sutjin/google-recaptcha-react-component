@@ -13,7 +13,7 @@ phases:
       # Discover and run unit tests in the 'tests' directory
       - npm run test
       - npm run eslint
-artifacts: # figure out what this is
+artifacts: # TODO figure out what artifacts does, if we need it
   type: zip
   files:
     - README.md
