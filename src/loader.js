@@ -1,17 +1,17 @@
-const callbackName = 'recaptchaOnLoad',
-  RECAPTCHA_URL = `https://www.google.com/recaptcha/api.js?onload=${callbackName}&render=explicit`;
+const callbackName = 'recaptchaOnLoad';
+const RECAPTCHA_URL = `https://www.google.com/recaptcha/api.js?onload=${callbackName}&render=explicit`;
 
-let loaded = false,
-  scriptAttached = false;
+let loaded = false;
+let scriptAttached = false;
 
-function onRecaptchaLoad () {
+function onRecaptchaLoad() {
   delete window[callbackName];
   loaded = true;
 }
 
-function performScriptLoad () {
-  const head = document.head || document.getElementsByTagName('head')[0],
-    script = document.createElement('script');
+function performScriptLoad() {
+  const head = document.head || document.getElementsByTagName('head')[0];
+  const script = document.createElement('script');
   script.src = RECAPTCHA_URL;
   script.type = 'text/javascript';
   script.async = true;
@@ -27,7 +27,7 @@ function performScriptLoad () {
   scriptAttached = true;
 }
 
-function loadRecaptcha (callback) {
+function loadRecaptcha(callback) {
   if (!scriptAttached) {
     performScriptLoad();
   }
