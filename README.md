@@ -7,7 +7,6 @@
 Easy to use React component to enable Google ReCaptcha for your form. The component allows the use of regular and even invisible ReCaptcha
 
 
-
 ## Using the components
 1. install the component to your project
 ```
