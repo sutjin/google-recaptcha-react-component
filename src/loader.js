@@ -1,5 +1,6 @@
 const callbackName = 'recaptchaOnLoad';
 const RECAPTCHA_URL = `https://www.google.com/recaptcha/api.js?onload=${callbackName}&render=explicit`;
+const SECONDARY_URL = `https:/www.recaptcha.net/recaptcha/api.js?onload=${callbackName}&render=explicit`;
 
 export default class reCaptchaLoader {
   constructor() {
@@ -7,10 +8,10 @@ export default class reCaptchaLoader {
     this.scriptAttached = false;
   }
 
-  performScriptLoad() {
+  performScriptLoad(baseUrl) {
     const head = document.head || document.getElementsByTagName('head')[0];
     const script = document.createElement('script');
-    script.src = RECAPTCHA_URL;
+    script.src = baseUrl;
     script.type = 'text/javascript';
     script.async = true;
     script.defer = true;
@@ -24,9 +25,10 @@ export default class reCaptchaLoader {
     this.scriptAttached = true;
   }
 
-  loadRecaptcha(callback) {
+  loadRecaptcha(callback, useSecondary = false) {
     if (!this.scriptAttached) {
-      this.performScriptLoad();
+      const baseUrl = useSecondary ? SECONDARY_URL : RECAPTCHA_URL;
+      this.performScriptLoad(baseUrl);
     }
 
     if (!this.loaded) {

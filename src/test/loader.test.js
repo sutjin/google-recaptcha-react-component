@@ -2,6 +2,7 @@ import Loader from '../loader';
 
 const callbackName = 'recaptchaOnLoad';
 const RECAPTCHA_URL = `https://www.google.com/recaptcha/api.js?onload=${callbackName}&render=explicit`;
+const SECONDARY_URL = `https:/www.recaptcha.net/recaptcha/api.js?onload=${callbackName}&render=explicit`;
 
 describe('Loader.constructor', () => {
   it('set default properties to false', () => {
@@ -17,12 +18,12 @@ describe('Loader.performScriptLoad', () => {
     const loader = new Loader();
     const baseUrl = RECAPTCHA_URL;
     let isFound = false;
-    
-    loader.performScriptLoad();
 
-    let scripts = document.getElementsByTagName('script');
-    for (var i = scripts.length; i--;) {
-        if (scripts[i].src == baseUrl) { isFound = true };
+    loader.performScriptLoad(baseUrl);
+
+    const scripts = document.getElementsByTagName('script');
+    for (let i = 0; i < scripts.length; i += 1) {
+      if (scripts[i].src === baseUrl) { isFound = true; }
     }
 
     expect(global.window[callbackName]).toBe(loader.onRecaptchaLoad);
@@ -44,7 +45,7 @@ describe('Loader.onRecaptchaLoad', () => {
   });
 });
 
-describe('Loader.loadRecaptcha', ()=> {
+describe('Loader.loadRecaptcha', () => {
   it('should trigger performScriptLoad and trigger callback', () => {
     jest.useFakeTimers();
     const loader = new Loader();
@@ -66,12 +67,30 @@ describe('Loader.loadRecaptcha', ()=> {
     const spyOnPerformScriptLoad = jest.spyOn(loader, 'performScriptLoad');
     const mockFunction = jest.fn();
 
-    loader.scriptAttached = true
+    loader.scriptAttached = true;
     loader.loaded = true;
 
     loader.loadRecaptcha(mockFunction);
 
     expect(spyOnPerformScriptLoad).not.toHaveBeenCalled();
     expect(mockFunction).toHaveBeenCalled();
-  })
+  });
+
+  it('should trigger performScriptLoad with primary url', () => {
+    const loader = new Loader();
+    const spyOnPerformScriptLoad = jest.spyOn(loader, 'performScriptLoad');
+    const mockFunction = jest.fn();
+
+    loader.loadRecaptcha(mockFunction);
+    expect(spyOnPerformScriptLoad).toHaveBeenCalledWith(RECAPTCHA_URL);
+  });
+
+  it('should trigger performScriptLoad with primary url', () => {
+    const loader = new Loader();
+    const spyOnPerformScriptLoad = jest.spyOn(loader, 'performScriptLoad');
+    const mockFunction = jest.fn();
+
+    loader.loadRecaptcha(mockFunction, true);
+    expect(spyOnPerformScriptLoad).toHaveBeenCalledWith(SECONDARY_URL);
+  });
 });

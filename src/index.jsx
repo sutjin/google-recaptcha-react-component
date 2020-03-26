@@ -37,7 +37,7 @@ class ReCaptcha extends React.Component {
   }
 
   renderReCaptcha(element) {
-    const { token, size } = this.props;
+    const { token, size, useSecondary } = this.props;
     const loader = new Loader();
 
     loader.loadRecaptcha((grecaptcha) => {
@@ -46,7 +46,7 @@ class ReCaptcha extends React.Component {
         callback: CALLBACK_NAME,
         size,
       });
-    });
+    }, useSecondary);
   }
 
   render() {
@@ -72,11 +72,13 @@ ReCaptcha.propTypes = {
   onSuccess: PropTypes.func.isRequired,
   size: PropTypes.string,
   onRef: PropTypes.func,
+  useSecondary: PropTypes.bool,
 };
 
 ReCaptcha.defaultProps = {
   size: '',
   onRef: () => {},
+  useSecondary: false,
 };
 
 export default ReCaptcha;

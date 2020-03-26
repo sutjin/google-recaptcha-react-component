@@ -40,7 +40,8 @@ Component Props
 | token  | **Required**. string  |  token given by Google ReCaptcha|
 |size|*Optional*. String| set value to "invisible" for invisible ReCaptcha|
 | onSuccess  | **Required**. function(token)  | Callback function triggered when ReCaptcha is resolved. *token* is a vlue returned by ReCapthca that you will need to validate.|
-|onRef|*Optional*. object| Required if using the invisible ReCaptcha, otherwise it is not needed
+|onRef|*Optional*. object| Required if using the invisible ReCaptcha, otherwise it is not needed|
+|useSecondary|*Optional*. Boolean | set to True if you want to use recaptcha.net instead of google.com|
 
 
 ### Example
