@@ -2,7 +2,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import PropTypes from 'prop-types';
-import loader from './loader';
+import Loader from './loader';
 
 const CALLBACK_NAME = 'recaptchaFunction';
 
@@ -37,15 +37,16 @@ class ReCaptcha extends React.Component {
   }
 
   renderReCaptcha(element) {
-    const { token, size } = this.props;
+    const { token, size, useSecondary } = this.props;
+    const loader = new Loader();
 
-    loader((grecaptcha) => {
+    loader.loadRecaptcha((grecaptcha) => {
       this.recaptchaId = grecaptcha.render(element, {
         sitekey: token,
         callback: CALLBACK_NAME,
         size,
       });
-    });
+    }, useSecondary);
   }
 
   render() {
@@ -71,11 +72,13 @@ ReCaptcha.propTypes = {
   onSuccess: PropTypes.func.isRequired,
   size: PropTypes.string,
   onRef: PropTypes.func,
+  useSecondary: PropTypes.bool,
 };
 
 ReCaptcha.defaultProps = {
   size: '',
   onRef: () => {},
+  useSecondary: false,
 };
 
 export default ReCaptcha;

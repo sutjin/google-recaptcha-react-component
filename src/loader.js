@@ -1,47 +1,50 @@
 const callbackName = 'recaptchaOnLoad';
 const RECAPTCHA_URL = `https://www.google.com/recaptcha/api.js?onload=${callbackName}&render=explicit`;
+const SECONDARY_URL = `https:/www.recaptcha.net/recaptcha/api.js?onload=${callbackName}&render=explicit`;
 
-let loaded = false;
-let scriptAttached = false;
-
-function onRecaptchaLoad() {
-  delete window[callbackName];
-  loaded = true;
-}
-
-function performScriptLoad() {
-  const head = document.head || document.getElementsByTagName('head')[0];
-  const script = document.createElement('script');
-  script.src = RECAPTCHA_URL;
-  script.type = 'text/javascript';
-  script.async = true;
-  script.defer = true;
-  script.onerror = (oError) => {
-    throw new URIError(`The script ${oError.target.src} is not accessible.`);
-  };
-
-  window[callbackName] = onRecaptchaLoad;
-
-  head.appendChild(script);
-
-  scriptAttached = true;
-}
-
-function loadRecaptcha(callback) {
-  if (!scriptAttached) {
-    performScriptLoad();
+export default class reCaptchaLoader {
+  constructor() {
+    this.loaded = false;
+    this.scriptAttached = false;
   }
 
-  if (!loaded) {
-    const intervalCheck = setInterval(() => {
-      if (loaded) {
-        clearInterval(intervalCheck);
-        callback(window.grecaptcha);
-      }
-    }, 1000);
-  } else {
-    callback(window.grecaptcha);
+  performScriptLoad(baseUrl) {
+    const head = document.head || document.getElementsByTagName('head')[0];
+    const script = document.createElement('script');
+    script.src = baseUrl;
+    script.type = 'text/javascript';
+    script.async = true;
+    script.defer = true;
+    script.onerror = (oError) => {
+      throw new URIError(`The script ${oError.target.src} is not accessible.`);
+    };
+
+    window[callbackName] = this.onRecaptchaLoad;
+
+    head.appendChild(script);
+    this.scriptAttached = true;
+  }
+
+  loadRecaptcha(callback, useSecondary = false) {
+    if (!this.scriptAttached) {
+      const baseUrl = useSecondary ? SECONDARY_URL : RECAPTCHA_URL;
+      this.performScriptLoad(baseUrl);
+    }
+
+    if (!this.loaded) {
+      const intervalCheck = setInterval(() => {
+        if (this.loaded) {
+          clearInterval(intervalCheck);
+          callback(window.grecaptcha);
+        }
+      }, 1000); // TODO: error if interval reached.
+    } else {
+      callback(window.grecaptcha);
+    }
+  }
+
+  onRecaptchaLoad() {
+    delete window[callbackName];
+    this.loaded = true;
   }
 }
-
-module.exports = loadRecaptcha;

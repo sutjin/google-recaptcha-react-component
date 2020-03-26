@@ -7,7 +7,7 @@ import Adapter from 'enzyme-adapter-react-16';
 // test
 import React from 'react';
 import renderer from 'react-test-renderer';
-import ReCaptcha from './index';
+import ReCaptcha from '../index';
 
 configure({ adapter: new Adapter() });
 
