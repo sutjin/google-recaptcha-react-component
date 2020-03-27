@@ -1,10 +1,12 @@
+/* eslint-disable class-methods-use-this */
 const callbackName = 'recaptchaOnLoad';
+const moduleLoad = 'reCaptchaModuleLoad';
 const RECAPTCHA_URL = `https://www.google.com/recaptcha/api.js?onload=${callbackName}&render=explicit`;
-const SECONDARY_URL = `https:/www.recaptcha.net/recaptcha/api.js?onload=${callbackName}&render=explicit`;
+const SECONDARY_URL = `https://www.recaptcha.net/recaptcha/api.js?onload=${callbackName}&render=explicit`;
 
 export default class reCaptchaLoader {
   constructor() {
-    this.loaded = false;
+    window[moduleLoad] = false;
     this.scriptAttached = false;
   }
 
@@ -31,9 +33,9 @@ export default class reCaptchaLoader {
       this.performScriptLoad(baseUrl);
     }
 
-    if (!this.loaded) {
+    if (!window[moduleLoad]) {
       const intervalCheck = setInterval(() => {
-        if (this.loaded) {
+        if (window[moduleLoad]) {
           clearInterval(intervalCheck);
           callback(window.grecaptcha);
         }
@@ -45,6 +47,6 @@ export default class reCaptchaLoader {
 
   onRecaptchaLoad() {
     delete window[callbackName];
-    this.loaded = true;
+    window[moduleLoad] = true;
   }
 }

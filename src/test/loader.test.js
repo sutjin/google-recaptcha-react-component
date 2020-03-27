@@ -1,14 +1,15 @@
 import Loader from '../loader';
 
 const callbackName = 'recaptchaOnLoad';
+const moduleLoad = 'reCaptchaModuleLoad';
 const RECAPTCHA_URL = `https://www.google.com/recaptcha/api.js?onload=${callbackName}&render=explicit`;
-const SECONDARY_URL = `https:/www.recaptcha.net/recaptcha/api.js?onload=${callbackName}&render=explicit`;
+const SECONDARY_URL = `https://www.recaptcha.net/recaptcha/api.js?onload=${callbackName}&render=explicit`;
 
 describe('Loader.constructor', () => {
   it('set default properties to false', () => {
     const loader = new Loader();
 
-    expect(loader.loaded).toBe(false);
+    expect(window[moduleLoad]).toBe(false);
     expect(loader.scriptAttached).toBe(false);
   });
 });
@@ -41,7 +42,7 @@ describe('Loader.onRecaptchaLoad', () => {
     loader.onRecaptchaLoad();
 
     expect(global.window[callbackName]).toBe(undefined);
-    expect(loader.loaded).toBe(true);
+    expect(window[moduleLoad]).toBe(true);
   });
 });
 
@@ -54,7 +55,7 @@ describe('Loader.loadRecaptcha', () => {
 
     loader.loadRecaptcha(mockFunction);
     expect(mockFunction).not.toHaveBeenCalled();
-    loader.loaded = true;
+    window[moduleLoad] = true;
     jest.advanceTimersByTime(1000);
 
     expect(spyOnPerformScriptLoad).toHaveBeenCalled();
@@ -68,7 +69,7 @@ describe('Loader.loadRecaptcha', () => {
     const mockFunction = jest.fn();
 
     loader.scriptAttached = true;
-    loader.loaded = true;
+    window[moduleLoad] = true;
 
     loader.loadRecaptcha(mockFunction);
 

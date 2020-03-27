@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import ReCaptcha from '../src/index';
+import ReCaptcha from '../src/index.jsx';
 
 class Parent extends Component {
   constructor() {
     super();
 
+    this.onSuccess = this.onSuccess.bind(this);
     this.onClick = this.onClick.bind(this);
   }
 
@@ -14,7 +15,7 @@ class Parent extends Component {
     this.child.execute(); // Triggers Invisible ReCaptcha
   }
 
-  static onSuccess(token) {
+  onSuccess(token) {
     window.console.log(token);
   }
 
@@ -27,7 +28,7 @@ class Parent extends Component {
           onSuccess={this.onSuccess}
           onRef={(ref) => { this.child = ref; }}
         />
-        <button type="button" onClick={this.onClick}>Child.method()</button>
+        <button type="button" onClick={this.onClick}>Click Me</button>
       </div>
     );
   }
